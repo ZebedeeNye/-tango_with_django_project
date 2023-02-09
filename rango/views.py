@@ -5,7 +5,6 @@ from rango.models import Category
 from rango.models import Page
 from rango.forms import CategoryForm
 from rango.forms import PageForm
-from django.shortcuts import redirect
 from django.http import HttpResponse
 
 def show_category(request, category_name_slug):
@@ -36,11 +35,11 @@ def add_category(request):
 def add_page(request, category_name_slug):
     try:
         category = Category.objects.get(slug=category_name_slug)
-    except Category.DoesNotExist:
+    except:
         category = None
     
     if category is None:
-        return redirect('/rango/')
+        return redirect(reverse('rango:index'))
     
     form = PageForm()
 
@@ -53,7 +52,6 @@ def add_page(request, category_name_slug):
                 page.category = category
                 page.views = 0
                 page.save()
-
                 return redirect(reverse('rango:show_category', kwargs={'category_name_slug': category_name_slug}))
         else:
             print(form.errors)
