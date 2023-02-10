@@ -33,6 +33,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_URL = 'rango:login'
 
 # Application definition
 
@@ -79,6 +80,7 @@ WSGI_APPLICATION = 'tango_with_django_project.wsgi.application'
 
 
 #Added this in!*******
+STATIC_URL = '/static/'
 STATICFILES_DIRS = [STATIC_DIR, ]
 
 #Added from page 59/ slide 68
